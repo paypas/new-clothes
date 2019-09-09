@@ -93,7 +93,7 @@ module.exports = function(Users) {
     Users.remoteMethod(
         'limit',
         {
-            description:'get category with limit',
+            description:'get Users with limit',
             accepts:[
                 {
                     arg:'limit', type:'number'
