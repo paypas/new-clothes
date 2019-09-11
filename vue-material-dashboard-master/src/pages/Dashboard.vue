@@ -212,6 +212,8 @@ import {
   OrderedTable
 } from "@/components";
 
+import commodity from '../api/commodity/index';
+
 export default {
   components: {
     StatsCard,
@@ -220,12 +222,15 @@ export default {
     NavTabsTable,
     OrderedTable
   },
+  computed:{
+    // getData()
+  },
   data() {
     return {
       dailySalesChart: {
         data: {
-          labels: ["M", "T", "W", "T", "F", "S", "S"],
-          series: [[12, 17, 7, 17, 23, 18, 38]]
+          labels: [],
+          series: [[]]
         },
         options: {
           lineSmooth: this.$Chartist.Interpolation.cardinal({
@@ -307,6 +312,21 @@ export default {
         ]
       }
     };
+  },
+  methods:{
+    getData(){
+        let self= this;
+        commodity
+          .getCommodity()
+          .then(function(result){
+            dailySalesChart: {
+              data: {
+                labels: [result.day];
+                series: [[result.quantity]];
+              }
+          }
+          })
+    }
   }
 };
 </script>

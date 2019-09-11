@@ -1,23 +1,24 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
-      <!-- <headerz v-if="['dashboard','register'].indexOf($route.name) > -1"/> -->
-      <headery v-if="['login'].indexOf($route.name) > -1"/>
+      
+      <headerowner v-if="['ownerDashboard', 'commodityOwner', 'transactionOwner'].indexOf($route.name) > -1"/>
+      <!-- <headery v-if="['login'].indexOf($route.name) > -1"/> -->
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
-import Headerz from "@/components/Headerz.vue"
-import Headery from "@/components/Headery.vue"
+import Headerowner from "@/components/owner/HeaderOwner.vue"
+// import Headery from "@/components/Headery.vue"
 
 export default {
   name: 'LayoutDefault',
 
   components: {
-    Headerz,
-    Headery
+    Headerowner
+    // Headery
   },
 
   data () {

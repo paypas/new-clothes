@@ -122,7 +122,7 @@ export default{
                 });
 
 
-                register_api
+            register_api
                 .registerUserSpringBoot(credentials, self.password)
                 .then(function(result) {
                 if (!result) {

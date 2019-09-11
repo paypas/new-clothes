@@ -1,6 +1,6 @@
 <template>
 <div>
-    <q-header elevated  class="bg-black">
+    <q-header elevated  class="bg-red">
       <q-toolbar>
         <q-btn
           flat
@@ -25,25 +25,25 @@
     >
       <q-list>
         <q-item-label header>Sidebar</q-item-label>
-        <q-item clickable tag="a" href="/#/mainmenu">
+        <q-item clickable tag="a" href="/#/owner/commodity">
           <q-item-section avatar>
-            <q-icon name="dashboard" />
+            <q-icon name="trending_up" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Dashboard</q-item-label>
-            <q-item-label caption>Main Menu</q-item-label>
+            <q-item-label>Grafik Barang</q-item-label>
+            <q-item-label caption>Menampilkan grafik barang masuk dan rusak</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" href="/#/berita">
+        <q-item clickable tag="a" href="/#/owner/transaction">
           <q-item-section avatar>
-            <q-icon name="cloud_upload" />
+            <q-icon name="shopping_cart" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Berita</q-item-label>
-            <q-item-label caption>Upload Berita</q-item-label>
+            <q-item-label>Grafik Penjualan</q-item-label>
+            <q-item-label caption>Menampilkan grafik barang masuk dan rusak</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" href="/#/assesment">
+        <!-- <q-item clickable tag="a" href="/#/assesment">
           <q-item-section avatar>
             <q-icon name="cloud_upload" />
           </q-item-section>
@@ -60,7 +60,7 @@
             <q-item-label>History</q-item-label>
             <q-item-label caption>History Upload</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
         <q-item clickable tag="a"  @click="logout()">
           <q-item-section avatar>
             <q-icon name="exit_to_app" />

@@ -47,5 +47,9 @@
   "Users": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "BrokenCommodity": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

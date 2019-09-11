@@ -19,9 +19,12 @@
       "type": "number",
       "required": true
     },
+    "entry_day": {
+      "type": "string"
+    },
     "entry_date": {
       "type": "date",
-      "required": true
+      "defaultFn": "now"
     },
     "entryBy": {
       "type": "string",
