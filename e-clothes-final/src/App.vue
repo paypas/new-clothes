@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-page-container>
       
-      <headerowner v-if="['ownerDashboard', 'commodityOwner', 'transactionOwner'].indexOf($route.name) > -1"/>
+      <headerowner v-if="['ownerDashboard', 'commodityOwner', 'transactionOwner','ownerProfile'].indexOf($route.name) > -1"/>
       <!-- <headery v-if="['login'].indexOf($route.name) > -1"/> -->
       <router-view />
     </q-page-container>

@@ -12,7 +12,7 @@
         />
 
         <q-toolbar-title>
-          Web Loader App
+          Welcome {{this.$ls.get("userNow")}}
         </q-toolbar-title>
 
         <div></div>
@@ -43,16 +43,16 @@
             <q-item-label caption>Menampilkan grafik barang masuk dan rusak</q-item-label>
           </q-item-section>
         </q-item>
-        <!-- <q-item clickable tag="a" href="/#/assesment">
+        <q-item clickable tag="a" href="/#/owner/profile">
           <q-item-section avatar>
-            <q-icon name="cloud_upload" />
+            <q-icon name="account_circle" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Assesment</q-item-label>
-            <q-item-label caption>Upload Assesment</q-item-label>
+            <q-item-label>Profile</q-item-label>
+            <q-item-label caption>Profil Owner</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" href="/#/history">
+        <!-- <q-item clickable tag="a" href="/#/history">
           <q-item-section avatar>
             <q-icon name="history" />
           </q-item-section>
@@ -85,6 +85,11 @@ export default {
   methods:{
     logout(){
       this.$ls.remove("userNow")
+      this.$ls.remove("jsonTransaction")
+      this.$ls.remove("tokenSpringBoot")
+      this.$ls.remove("tokenLoopback")
+      this.$ls.remove("token")
+      this.$ls.remove("json")
       this.$router.push("/")
     }
   }

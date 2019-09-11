@@ -30,7 +30,7 @@ export default {
   async mounted () {
     this.loaded = false;
     this.json = '';
-      commodity.getCommodity().then(function(result){
+      var comm = commodity.getCommodity().then(function(result){
             localStorage.setItem('json', JSON.stringify(result));
         });
         this.json = (localStorage.getItem('json')); 

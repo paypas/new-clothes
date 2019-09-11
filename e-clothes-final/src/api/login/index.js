@@ -1,6 +1,6 @@
 import VueResource from 'vue-resource'
 import Vue from 'vue'
-import {getApiNoAuth} from '../utils'
+import {getApiNoAuth, getApiNoAuthSpringBoot} from '../utils'
 
 Vue.use(VueResource)
 
@@ -21,7 +21,19 @@ export default {
         return getApiNoAuth().post('Users/login', credentials)
         .then(function(response){
             console.log(response)
-            localStorage.setItem('token', response.data.id);
+            localStorage.setItem('tokenLoopback', response.data.userId);
+            return response.data;
+        }).catch(function(err){
+            console.log(err)
+        })    
+    },
+
+    loginUserSpringBoot(credentials, window){
+        let self = this;
+        return getApiNoAuthSpringBoot().post('user/login', credentials)
+        .then(function(response){
+            console.log(response)
+            localStorage.setItem('tokenSpringBoot', response.data.id);
             return response.data;
         }).catch(function(err){
             console.log(err)

@@ -83,14 +83,42 @@ export default{
                 password:self.password
             };
 
+            console.log(credentials)
+
             login_api
                 .loginUser(credentials, self.password)
                 .then(function(result) {
-                // roles
-                // .getDataRoles(window).then(function(res){
-                //     console.log(res)
-                //     self.dataRoles = res
-                // })
+
+                if (!result) {
+                    self.$q.notify({
+                    color: "red-5",
+                    textColor: "white",
+                    icon: "fas fa-exclamation-triangle",
+                    message: "Wrong Username or Password"
+                    });
+                } else {
+                    self.$q.notify({
+                    color: "green-4",
+                    textColor: "white",
+                    icon: "fas fa-check-circle",
+                    message: "You're Logged In"
+                    });
+                    // self.$router.push("mainmenu");
+                }
+                return result;
+                })
+                .catch(function(err) {
+                console.log(err);
+                });
+
+
+
+
+
+              login_api
+                .loginUserSpringBoot(credentials, self.password)
+                .then(function(result) {
+                console.log(result)
 
 
 
@@ -110,9 +138,17 @@ export default{
                     icon: "fas fa-check-circle",
                     message: "You're Logged In"
                     });
-                    self.$ls.set("userNow", result.id);
+                    self.$ls.set("userNow", result.full_name);
                     console.log("id nya dia = ", self.$ls.get("userNow"))
                     // self.$router.push("mainmenu");
+                    
+                    if(result.roles === 'admin'){
+
+                    }else if(result.roles === 'owner'){
+                      self.$router.push("/owner/commodity");
+                    }else{
+                      self.$router.push("/");
+                    }
                 }
                 return result;
                 })

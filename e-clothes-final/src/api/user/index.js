@@ -5,9 +5,10 @@ import {getApiNoAuth, getApiNoAuthSpringBoot} from '../utils'
 Vue.use(VueResource)
 
 export default {
-    registerUser(credentials, window){
+
+    getUserSpringBoot(data){
         // let self = this;
-        return getApiNoAuth().post('Users', credentials)
+        return getApiNoAuthSpringBoot().get('user/'.concat(data))
         .then(function(response){
             console.log(response)
             // localStorage.setItem('token', response.data.id);
@@ -17,9 +18,10 @@ export default {
         })    
     },
 
-    registerUserSpringBoot(credentials, window){
+    
+    updateUserLoopback(data){
         // let self = this;
-        return getApiNoAuthSpringBoot().post('user/register', credentials)
+        return getApiNoAuth().post('Users', data)
         .then(function(response){
             console.log(response)
             // localStorage.setItem('token', response.data.id);
@@ -27,5 +29,16 @@ export default {
         }).catch(function(err){
             console.log(err)
         })    
+    },
+
+    updateUserSpringBoot(id, data){
+        return getApiNoAuthSpringBoot().put('user/update/'.concat(id), data)
+        .then(function(response){
+            console.log(response)
+            // localStorage.setItem('token', response.data.id);
+            return response.data;
+        }).catch(function(err){
+            console.log(err)
+        })
     }
 }
