@@ -34,12 +34,14 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	private UserRepositoryCrud userRepositoryCrud;
-	
+
+	@CrossOrigin
 	@GetMapping
 	public List<UserModel> getAllUserModel(){
 		return userRepository.findAll();
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/{id}")
 	public ResponseEntity<UserModel> getUserModelById(@PathVariable(value = "id") Long userId)throws ResourceNotFoundException {
 		UserModel user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException(""));
@@ -57,9 +59,10 @@ public class UserController {
 //		UserModel user = userRepository.login(map.get("email").toString(), getMD5(map.get("password").toString()));
 //		return ResponseEntity.ok().body(user);
 //	}
-	
-	@GetMapping("/login")
-	public String loginControl(
+
+	@CrossOrigin
+	@PostMapping("/login")
+	public ResponseEntity<UserModel> loginControl(
 			@Valid @RequestBody String data) throws NoSuchAlgorithmException {
 		JsonParser springParse = JsonParserFactory.getJsonParser();
 		Map<String, Object> map = springParse.parseMap(data);
@@ -67,11 +70,12 @@ public class UserController {
 		String mapArray[]= new String[map.size()];
 
 		UserModel user = userRepository.login(map.get("email").toString(), getMD5(map.get("password").toString()));
-		return "redirect:/redirect";
+		return ResponseEntity.ok().body(user);
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/findUsername")
-	public String findByUsername(
+	public ResponseEntity<UserModel> findByUsername(
 			@Valid @RequestBody String data) {
 		JsonParser springParse = JsonParserFactory.getJsonParser();
 		Map<String, Object> map = springParse.parseMap(data);
@@ -79,9 +83,10 @@ public class UserController {
 		String mapArray[]= new String[map.size()];
 
 		UserModel user = userRepository.findByUsername(map.get("username").toString());
-		return "redirect:/redirect";
+		return ResponseEntity.ok().body(user);
 	}
-	
+
+	@CrossOrigin
 	@PutMapping("/update/{id}")
 	public ResponseEntity<UserModel> updateUserModel(@PathVariable(value = "id") Long userId,
 			@Valid @RequestBody String userDetails) throws ResourceNotFoundException, NoSuchAlgorithmException {
@@ -95,8 +100,9 @@ public class UserController {
 		user.setEmail(map.get("email").toString());
 		user.setFull_name(map.get("full_name").toString());
 		user.setUsername(map.get("username").toString());
-		user.setPassword(getMD5(map.get("password").toString()));
-		user.setRoles(3);
+		user.setPassword((map.get("password").toString()));
+		user.setRoles(map.get("roles").toString());
+		user.setAddress(map.get("address").toString());
 		final UserModel updatedUserModel = userRepository.save(user);
 		return ResponseEntity.ok(updatedUserModel);
 	}
@@ -104,17 +110,19 @@ public class UserController {
 	@CrossOrigin
 	@PostMapping("/register")
 	public UserModel createUserModel(@Valid @RequestBody UserModel user) throws NoSuchAlgorithmException {
-		user.setRoles(3);
+		user.setRoles("customer");
 		user.setPassword(getMD5(user.getPassword()));
 		return userRepository.save(user);
 	}
-	
+
+	@CrossOrigin
 	@GetMapping(value = "/redirect")
 	public void method(HttpServletResponse httpServletResponse) {
 	    httpServletResponse.setHeader("Location", "localhost:8080/");
 	    httpServletResponse.setStatus(302);
 	}
 
+	@CrossOrigin
 	@DeleteMapping("/{id}")
 	public Map<String, Boolean> deleteUserModel(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException{
 		UserModel user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException(""));
@@ -127,7 +135,7 @@ public class UserController {
 	
 	
 	
-	
+
 	public static String getMD5(String data) throws NoSuchAlgorithmException
     { 
 		MessageDigest messageDigest=MessageDigest.getInstance("MD5");

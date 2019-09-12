@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="user")
 public class UserModel {
 	public long id;
-	public long roles;
+	public String roles;
 	public String full_name;
 	public String username;
 	public String email;
@@ -28,7 +28,7 @@ public class UserModel {
 
 
 
-	public UserModel(long id, long roles, String full_name, String username, String email, String password, String address) {
+	public UserModel(long id, String roles, String full_name, String username, String email, String password, String address) {
 		this.id = id;
 		this.roles = roles;
 		this.full_name = full_name;
@@ -55,13 +55,13 @@ public class UserModel {
 
 
 	@Column(name = "roles", nullable = false)
-	public long getRoles() {
+	public String getRoles() {
 		return roles;
 	}
 
 
 
-	public void setRoles(long roles) {
+	public void setRoles(String roles) {
 		this.roles = roles;
 	}
 
